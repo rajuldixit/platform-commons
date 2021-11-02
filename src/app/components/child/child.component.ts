@@ -1,5 +1,5 @@
+import { DataService } from './../../services/data.service';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-child',
