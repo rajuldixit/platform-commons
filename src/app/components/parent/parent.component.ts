@@ -1,5 +1,5 @@
 import { DataService } from './../../services/data.service';
-
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,8 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class ParentComponent implements OnInit {
   parentDropdownData: Array<{}> = new Array();
   selectedParentDropdownId: number;
-  errorMessage: string;
-  constructor(private dataService: DataService) { }
+  errorMessage: string = '';
+  isErrorMessage: boolean = false;
+  constructor(private dataService: DataService, private cdRef:ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getParentsJSONdata();
@@ -27,7 +28,12 @@ export class ParentComponent implements OnInit {
     this.selectedParentDropdownId = i.target.value;
   }
 
+  ngAfterViewChecked()
+  {
+    this.cdRef.detectChanges();
+  }
   onMessageRecieved(e) {
+    this.isErrorMessage = true;
     this.errorMessage = e;
   }
 

@@ -1,9 +1,10 @@
 
 <div class="parent-wrapper">
   <select (change)="selectedItem($event)">
+    <option>Select</option>
     <option *ngFor="let i of parentDropdownData" [value]="i.Id">{{i.name}}</option>
   </select>
-
+  <div *ngIf="isErrorMessage">{{errorMessage}}</div>
   <div class="child-wrapper">
     <app-child [id]="selectedParentDropdownId" (message)="onMessageRecieved($event)"></app-child>
   </div>

@@ -11,6 +11,7 @@ export class ChildComponent implements OnInit, OnChanges {
   @Input() id : number;
   @Output() message = new EventEmitter();
   age: string;
+  flag: boolean;
   childJSONdata: Array<{}> = new Array();
 
   constructor(private dataService: DataService) { }
@@ -22,15 +23,17 @@ export class ChildComponent implements OnInit, OnChanges {
   }
 
   fetchAge() {
-    let flag = false;
+    this.flag = false;
     this.childJSONdata.forEach((item: {Id: number, age: string}) => {
       if(item.Id == this.id) {
         this.age = item.age;
-        flag = true;
+        this.flag = true;
       }
     });
-    if(!flag) {
+    if(!this.flag) {
       this.message.emit('No data present');
+    } else {
+      this.message.emit('');
     }
   }
 
